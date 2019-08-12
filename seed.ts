@@ -27,6 +27,11 @@ const avatarSeeds = SEED_AVATARS.map(
 export async function main() {
   const avatarsSeed = await Promise.all(avatarSeeds);
 
+  const metadata = await prisma.createMetadata({
+    name: 'Default',
+    expire: (new Date().getTime() + 691200000).toString(),
+  });
+
   const humanTypeSeed = await prisma.createType({
     name: 'Human',
   });
@@ -45,7 +50,10 @@ export async function main() {
 
   // HUMAN HERO SEED
   const humanHeroSeed = SEED_HUMAN_HERO.map(
-    async ({ avatar_url, full_name, description, type }: IHero, index: number) => {
+    async (
+      { avatar_url, full_name, description, type }: IHero,
+      index: number,
+    ) => {
       return prisma.createHero({
         full_name,
         avatar_url,
@@ -61,7 +69,10 @@ export async function main() {
 
   // ANIMAL HERO SEED
   const animalHeroSeed = SEED_ANIMAL_HERO.map(
-    async ({ avatar_url, full_name, description, type }: IHero, index: number) => {
+    async (
+      { avatar_url, full_name, description, type }: IHero,
+      index: number,
+    ) => {
       return prisma.createHero({
         full_name,
         avatar_url,
@@ -77,7 +88,10 @@ export async function main() {
 
   // PLANT HERO SEED
   const plantHeroSeed = SEED_PLANT_HERO.map(
-    async ({ avatar_url, full_name, description, type }: IHero, index: number) => {
+    async (
+      { avatar_url, full_name, description, type }: IHero,
+      index: number,
+    ) => {
       return prisma.createHero({
         full_name,
         avatar_url,
@@ -93,7 +107,10 @@ export async function main() {
 
   // OTHER HERO SEED
   const otherHeroSeed = SEED_OTHER_HERO.map(
-    async ({ avatar_url, full_name, description, type }: IHero, index: number) => {
+    async (
+      { avatar_url, full_name, description, type }: IHero,
+      index: number,
+    ) => {
       return prisma.createHero({
         full_name,
         avatar_url,
